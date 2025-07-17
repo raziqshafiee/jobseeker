@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "express-rate-limit": "^7.5.1",
+    "firebase-admin": "^13.4.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.2"
+  }
+}

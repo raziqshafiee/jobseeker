@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Professional Skills Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .assessment-info {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            text-align: center;
+        }
+
+        .info-item .number {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .info-item .label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        /* ENHANCED LOGIN STYLES */
+        .login-container {
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .login-header {
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            color: #4a5568;
+            font-size: 2em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-header p {
+            color: #718096;
+            font-size: 1.1em;
+        }
+
+        .job-seeker-badge {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .auth-forms {
+            background: rgba(248, 249, 250, 0.8);
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: width 0.3s, height 0.3s;
+            transform: translate(-50%, -50%);
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .btn-google {
+            background: white;
+            color: #333;
+            border: 2px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-google:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: #4285f4;
+        }
+
+        .btn-google::before {
+            background: rgba(66, 133, 244, 0.1);
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            color: #666;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .divider span {
+            background: rgba(248, 249, 250, 0.8);
+            padding: 0 15px;
+            position: relative;
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .auth-toggle p {
+            color: #718096;
+            margin-bottom: 15px;
+        }
+
+        .auth-toggle a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .auth-toggle a:hover {
+            color: #4c51bf;
+            background: rgba(102, 126, 234, 0.1);
+            text-decoration: none;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .alert {
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+            font-weight: 500;
+            animation: slideInDown 0.5s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .alert.success {
+            background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
+            color: #22543d;
+            border: 1px solid #68d391;
+        }
+
+        .alert.error {
+            background: linear-gradient(135deg, #fed7d7, #feb2b2);
+            color: #822727;
+            border: 1px solid #fc8181;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .form-transition {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.4s ease;
+        }
+
+        .form-transition.fade-out {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .form-transition.fade-in {
+            opacity: 0;
+            transform: translateX(20px);
+            animation: fadeInRight 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeInRight {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .quiz-container {
+            padding: 30px;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .progress-bar {
+            background: #f0f0f0;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            flex: 1;
+            margin: 0 20px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .timer {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .timer.warning {
+            background: #ffc107;
+            animation: pulse 1s infinite;
+        }
+
+        .timer.critical {
+            background: #dc3545;
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .question-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+        }
+
+        .skill-category {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .option {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .option-letter {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .option.selected .option-letter {
+            background: white;
+            color: #667eea;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .skill-score {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .skill-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .skill-percentage {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .skill-bar {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .skill-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .score-details {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .start-quiz {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .start-quiz h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .start-quiz p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .quiz-instructions {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .quiz-instructions h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .quiz-instructions ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .quiz-instructions li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .quiz-instructions li:last-child {
+            border-bottom: none;
+        }
+
+        .quiz-instructions li:before {
+            content: "✓";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .user-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .user-info h4 {
+            color: #1976d2;
+            margin-bottom: 5px;
+        }
+
+        .logout-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            float: right;
+        }
+
+        .logout-btn:hover {
+            background: #d32f2f;
+        }
+
+        .redirect-notice {
+            background: linear-gradient(135deg, #e6fffa, #b2f5ea);
+            color: #047857;
+            border: 1px solid #6ee7b7;
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .redirect-notice.show {
+            display: block;
+            animation: slideInDown 0.5s ease-out;
+        }
+
+        .redirect-notice a {
+            color: #065f46;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid #065f46;
+            transition: all 0.3s ease;
+        }
+
+        .redirect-notice a:hover {
+            color: #047857;
+            border-bottom-color: #047857;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .quiz-container, .login-container {
+                padding: 20px;
+            }
+
+            .quiz-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .progress-bar {
+                margin: 0;
+                order: -1;
+            }
+
+            .question-card {
+                padding: 20px;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .score-breakdown {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-forms {
+                padding: 20px;
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Professional Skills Assessment</h1>
+            <p>Universal evaluation for all job positions</p>
+            <div class="assessment-info">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="number">15</div>
+                        <div class="label">Questions</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="number">15</div>
+                        <div class="label">Minutes</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="number">5</div>
+                        <div class="label">Skill Areas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ENHANCED LOGIN SECTION -->
+        <div id="loginSection" class="login-container">
+            <div class="login-header">
+                <h2>Welcome! Please Login to Continue</h2>
+                <p>Access your Professional Skills Assessment</p>
+                <div class="job-seeker-badge">
+                    🚀 Job Seeker Portal
+                </div>
+            </div>
+            
+            <!-- Alerts -->
+            <div id="alert" class="alert"></div>
+            <div id="redirect-notice" class="redirect-notice"></div>
+
+            <div class="auth-forms">
+                <!-- LOGIN FORM -->
+                <div id="loginForm" class="form-transition">
+                    <h3 style="text-align: center; margin-bottom: 20px; color: #2d3748;">Welcome Back</h3>
+                    
+                    <!-- Google Sign-In Button -->
+                    <button id="googleSignInBtn" class="btn btn-google">
+                        <svg class="google-icon" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Continue with Google
+                    </button>
+
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+
+                    <form onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="loginEmail">📧 Email Address</label>
+                            <input type="email" id="loginEmail" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">🔒 Password</label>
+                            <input type="password" id="loginPassword" required placeholder="Enter your password">
+                        </div>
+                        <button type="submit" class="btn">
+                            <span class="btn-text">🔓 Sign In to Assessment</span>
+                        </button>
+                    </form>
+                    
+                    <div class="auth-toggle">
+                        <p>Don't have an account yet?</p>
+                        <a href="#" onclick="switchTab('register')">Create Job Seeker Account</a>
+                    </div>
+                </div>
+
+                <!-- REGISTER FORM -->
+                <div id="registerForm" class="form-transition" style="display: none;">
+                    <h3 style="text-align: center; margin-bottom: 20px; color: #2d3748;">Start Your Career Journey</h3>
+                    
+                    <!-- Google Sign-Up Button -->
+                    <button id="googleSignUpBtn" class="btn btn-google">
+                        <svg class="google-icon" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Sign up with Google
+                    </button>
+
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+
+                    <form onsubmit="handleRegister(event)">
+                        <div class="two-column">
+                            <div class="form-group">
+                                <label for="registerFirstName">👤 First Name</label>
+                                <input type="text" id="registerFirstName" required placeholder="Enter your first name">
+                            </div>
+                            <div class="form-group">
+                                <label for="registerLastName">👤 Last Name</label>
+                                <input type="text" id="registerLastName" required placeholder="Enter your last name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">📧 Email Address</label>
+                            <input type="email" id="registerEmail" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">🔒 Password</label>
+                            <input type="password" id="registerPassword" required placeholder="Create a password" minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPhone">📱 Phone Number (Optional)</label>
+                            <input type="tel" id="registerPhone" placeholder="Enter your phone number">
+                        </div>
+                        <button type="submit" class="btn">
+                            <span class="btn-text">🎯 Create Account & Take Assessment</span>
+                        </button>
+                    </form>
+                    
+                    <div class="auth-toggle">
+                        <p>Already have an account?</p>
+                        <a href="#" onclick="switchTab('login')">Sign In Here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="startScreen" class="start-quiz" style="display: none;">
+            <div id="userInfo" class="user-info" style="display: none;">
+                <button class="logout-btn" onclick="logout()">Logout</button>
+                <h4>Welcome back!</h4>
+                <p id="userDetails"></p>
+            </div>
+
+            <h2>Welcome to the Professional Skills Assessment</h2>
+            <p>This assessment evaluates core professional skills that are valuable across all industries and job roles. Your results will be saved to your profile and visible to employers when you apply for jobs.</p>
+            
+            <div class="quiz-instructions">
+                <h3>Assessment Instructions:</h3>
+                <ul>
+                    <li>15 questions covering 5 essential professional skill areas</li>
+                    <li>15 minutes time limit (1 minute per question)</li>
+                    <li>Each question has 4 multiple choice options</li>
+                    <li>You can navigate back and forth between questions</li>
+                    <li>Your score will be calculated automatically</li>
+                    <li>Results are saved permanently to your profile</li>
+                    <li>You can only take this assessment once</li>
+                </ul>
+            </div>
+            
+            <button class="btn" onclick="startQuiz()">
+                Start Assessment
+            </button>
+        </div>
+
+        <div id="loadingState" class="loading" style="display: none;">
+            <div class="loading-spinner"></div>
+            <h3>Loading Assessment...</h3>
+            <p>Please wait while we prepare your questions.</p>
+        </div>
+
+        <div id="errorState" class="alert error" style="display: none; text-align: center; padding: 50px;"></div>
+
+        <div id="quizContent" class="quiz-container" style="display: none;">
+            <div class="quiz-header">
+                <div class="progress-info">
+                    <span id="questionProgress">Question 1 of 15</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="timer" id="timer">15:00</div>
+            </div>
+
+            <div id="questionContainer">
+                <div class="question-card">
+                    <div class="skill-category" id="skillCategory">Problem Solving</div>
+                    <div class="question-number" id="questionNumber">Question 1</div>
+                    <div class="question-text" id="questionText"></div>
+                    <div class="options" id="optionsContainer"></div>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prevBtn" onclick="previousQuestion()" disabled>
+                    ← Previous
+                </button>
+                <button class="btn" id="nextBtn" onclick="nextQuestion()">
+                    Next →
+                </button>
+                <button class="btn" id="submitBtn" onclick="submitQuiz()" style="display: none;">
+                    Submit Assessment
+                </button>
+            </div>
+        </div>
+
+        <div id="resultsContent" class="results" style="display: none;">
+            <h2>🎉 Assessment Completed!</h2>
+            <div class="score-circle">
+                <span id="finalScore">0%</span>
+            </div>
+            
+            <div class="score-breakdown" id="skillBreakdown">
+                <!-- Skill scores will be populated here -->
+            </div>
+
+            <div class="score-details">
+                <div class="score-item">
+                    <span>Correct Answers:</span>
+                    <span id="correctCount">0/0</span>
+                </div>
+                <div class="score-item">
+                    <span>Points Earned:</span>
+                    <span id="pointsEarned">0/0</span>
+                </div>
+                <div class="score-item">
+                    <span>Time Taken:</span>
+                    <span id="timeTaken">0:00</span>
+                </div>
+            </div>
+            
+            <div class="alert success">
+                Your professional skills assessment score has been recorded and will be visible to employers when you apply for jobs.
+            </div>
+            
+            <button class="btn" onclick="goToJobSearch()">
+                Search for Jobs
+            </button>
+            <button class="btn btn-secondary" onclick="downloadCertificate()" style="margin-left: 10px;">
+                Download Certificate
+            </button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDreznbSPyOFi35R7vP6lyolvNI_lEWdPo",
+            authDomain: "jobseeker-655c1.firebaseapp.com",
+            projectId: "jobseeker-655c1",
+            storageBucket: "jobseeker-655c1.firebasestorage.app",
+            messagingSenderId: "685942696547",
+            appId: "1:685942696547:web:088e5ce6d4886b0020a656",
+            measurementId: "G-1C7PERBMPX"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Make auth available globally
+        window.firebaseAuth = auth;
+        window.googleProvider = provider;
+        window.signInWithPopup = signInWithPopup;
+        window.onAuthStateChanged = onAuthStateChanged;
+        window.firebaseSignOut = signOut;
+        window.firebaseInitialized = true;
+    </script>
+
+    <script>
+        // Global configuration
+        const API_BASE_URL = 'http://localhost:3001';
+        const API_BASE = 'http://localhost:3001/api';
+
+        // Universal Quiz Questions - covering key professional skills
+        const universalQuestions = [
+            // Problem Solving & Critical Thinking
+            {
+                id: 1,
+                category: "Problem Solving",
+                question: "You encounter a project deadline that seems impossible to meet with current resources. What's your best approach?",
+                option_a: "Work overtime until completion regardless of quality",
+                option_b: "Analyze the scope, prioritize critical features, and communicate realistic expectations",
+                option_c: "Ask for deadline extension without proposing solutions",
+                option_d: "Assign blame to team members for poor planning",
+                correct_answer: "B",
+                points: 10
+            },
+            {
+                id: 2,
+                category: "Problem Solving",
+                question: "When faced with a complex problem you've never encountered before, what's your first step?",
+                option_a: "Ask someone else to solve it immediately",
+                option_b: "Break it down into smaller, manageable components",
+                option_c: "Guess and try random solutions",
+                option_d: "Avoid the problem until later",
+                correct_answer: "B",
+                points: 10
+            },
+            {
+                id: 3,
+                category: "Problem Solving",
+                question: "You notice a recurring issue affecting team productivity. How do you address it?",
+                option_a: "Document the pattern, analyze root causes, and propose solutions",
+                option_b: "Complain about it but take no action",
+                option_c: "Work around it without telling anyone",
+                option_d: "Hope someone else notices and fixes it",
+                correct_answer: "A",
+                points: 10
+            },
+
+            // Communication & Collaboration
+            {
+                id: 4,
+                category: "Communication",
+                question: "When explaining a technical concept to a non-technical colleague, you should:",
+                option_a: "Use complex technical jargon to show expertise",
+                option_b: "Use analogies and simple language while checking understanding",
+                option_c: "Provide only written documentation",
+                option_d: "Assume they should already know the terminology",
+                correct_answer: "B",
+                points: 10
+            },
+            {
+                id: 5,
+                category: "Communication",
+                question: "During a team meeting, you disagree with a proposed solution. How do you respond?",
+                option_a: "Stay silent to avoid conflict",
+                option_b: "Respectfully present alternative ideas with supporting reasoning",
+                option_c: "Immediately criticize the proposal without alternatives",
+                option_d: "Agree publicly but complain privately",
+                correct_answer: "B",
+                points: 10
+            },
+            {
+                id: 6,
+                category: "Communication",
+                question: "When giving feedback to a colleague, the most effective approach is to:",
+                option_a: "Focus on specific behaviors and provide constructive suggestions",
+                option_b: "Only point out what's wrong without solutions",
+                option_c: "Give feedback publicly in front of the team",
+                option_d: "Avoid giving feedback to maintain relationships",
+                correct_answer: "A",
+                points: 10
+            },
+
+            // Adaptability & Learning
+            {
+                id: 7,
+                category: "Adaptability",
+                question: "Your company implements a new software system that changes your daily workflow. How do you respond?",
+                option_a: "Resist the change and continue using old methods",
+                option_b: "Proactively learn the new system and help others adapt",
+                option_c: "Complain about the inconvenience to management",
+                option_d: "Wait for extensive training before engaging with it",
+                correct_answer: "B",
+                points: 10
+            },
+            {
+                id: 8,
+                category: "Adaptability",
+                question: "You're assigned to a project requiring skills you don't currently possess. What's your approach?",
+                option_a: "Admit you can't do it and ask for reassignment",
+                option_b: "Identify learning resources and create a skill development plan",
+                option_c: "Pretend you know and figure it out as you go",
+                option_d: "Delegate all unfamiliar tasks to others",
+                correct_answer: "B",
+                points: 10
+            },
+            {
+                id: 9,
+                category: "Adaptability",
+                question: "Industry trends are rapidly changing your field. How do you stay relevant?",
+                option_a: "Stick to proven methods from your experience",
+                option_b: "Continuously learn through courses, reading, and networking",
+                option_c: "Hope your current skills remain valuable",
+                option_d: "Only learn when required by your employer",
+                correct_answer: "B",
+                points: 10
+            },
+
+            // Time Management & Organization
+            {
+                id: 10,
+                category: "Time Management",
+                question: "You have multiple urgent tasks due on the same day. How do you prioritize?",
+                option_a: "Work on the easiest tasks first",
+                option_b: "Assess impact and urgency, then prioritize accordingly",
+                option_c: "Work on whatever you feel like doing",
+                option_d: "Ask your supervisor to prioritize everything for you",
+                correct_answer: "B",
+                points: 10
+            },
+            {
+                id: 11,
+                category: "Time Management",
+                question: "You consistently find yourself running out of time for important tasks. What should you do?",
+                option_a: "Work longer hours every day",
+                option_b: "Analyze how you spend time and eliminate low-value activities",
+                option_c: "Ask for deadline extensions on all projects",
+                option_d: "Multitask more to fit everything in",
+                correct_answer: "B",
+                points: 10
+            },
+            {
+                id: 12,
+                category: "Time Management",
+                question: "When planning a large project, your first step should be to:",
+                option_a: "Start working immediately on any part",
+                option_b: "Break it into phases with milestones and deadlines",
+                option_c: "Wait until you have all information before starting",
+                option_d: "Assign the planning to someone else",
+                correct_answer: "B",
+                points: 10
+            },
+
+            // Professional Ethics & Integrity
+            {
+                id: 13,
+                category: "Professional Ethics",
+                question: "You discover a mistake in a completed project that could affect the client. What do you do?",
+                option_a: "Hope no one notices and stay quiet",
+                option_b: "Immediately inform relevant parties and propose solutions",
+                option_c: "Fix it quietly without telling anyone",
+                option_d: "Blame someone else for the mistake",
+                correct_answer: "B",
+                points: 10
+            },
+            {
+                id: 14,
+                category: "Professional Ethics",
+                question: "A colleague asks you to cover for them while they handle personal matters during work hours. You should:",
+                option_a: "Always agree to help regardless of impact",
+                option_b: "Consider the situation and ensure work responsibilities are met",
+                option_c: "Report them to management immediately",
+                option_d: "Ask for something in return",
+                correct_answer: "B",
+                points: 10
+            },
+            {
+                id: 15,
+                category: "Professional Ethics",
+                question: "You're asked to provide a reference for a former colleague who was not a strong performer. How do you respond?",
+                option_a: "Give a glowing recommendation to help them",
+                option_b: "Provide honest, professional feedback about their performance",
+                option_c: "Refuse to provide any reference",
+                option_d: "Focus only on their weaknesses",
+                correct_answer: "B",
+                points: 10
+            }
+        ];
+
+        // Global variables
+        let currentUser = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = [];
+        let startTime = null;
+        let timerInterval = null;
+        let timeRemaining = 900; // 15 minutes
+        let hasStarted = false;
+        let isProcessingAuth = false;
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Clear any existing auth state on page load
+            clearAuthState();
+            
+            // Always show login page first
+            showLoginSection();
+            
+            // Wait for Firebase to initialize
+            waitForFirebase();
+        });
+
+        function clearAuthState() {
+            // Only clear if there's a logout flag or if we're coming from a fresh login
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('logout') === 'true' || urlParams.get('fresh') === 'true') {
+                localStorage.removeItem('token');
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('authMethod');
+                
+                // Clear URL parameters
+                if (urlParams.get('logout') || urlParams.get('fresh')) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }
+        }
+
+        function waitForFirebase() {
+            if (typeof window.firebaseInitialized !== 'undefined') {
+                setupFirebaseAuth();
+            } else {
+                setTimeout(waitForFirebase, 100);
+            }
+        }
+
+        function setupFirebaseAuth() {
+            // Set up Google Sign-In buttons
+            document.getElementById('googleSignInBtn').addEventListener('click', handleGoogleSignIn);
+            document.getElementById('googleSignUpBtn').addEventListener('click', handleGoogleSignIn);
+
+            // Monitor auth state but don't auto-redirect during processing
+            window.onAuthStateChanged(window.firebaseAuth, (user) => {
+                if (user && !isProcessingAuth) {
+                    console.log('Firebase user detected:', user.email);
+                    // Only process if we don't have a local token
+                    if (!localStorage.getItem('authToken') && !localStorage.getItem('token')) {
+                        isProcessingAuth = true;
+                        handleFirebaseUser(user);
+                    }
+                }
+            });
+        }
+
+        async function handleGoogleSignIn() {
+            if (isProcessingAuth) return;
+            
+            try {
+                isProcessingAuth = true;
+                showAlert('Signing in with Google...', 'success');
+                
+                // Sign out any existing user first
+                try {
+                    await window.firebaseSignOut(window.firebaseAuth);
+                } catch (e) {
+                    // Ignore sign out errors
+                }
+                
+                const result = await window.signInWithPopup(window.firebaseAuth, window.googleProvider);
+                const user = result.user;
+                
+                console.log('Google sign-in successful:', user.email);
+                
+                // Get the Firebase ID token
+                const idToken = await user.getIdToken();
+                
+                // Send to your backend for verification and user creation/login
+                await handleFirebaseAuth(idToken, user);
+                
+            } catch (error) {
+                isProcessingAuth = false;
+                console.error('Google Sign-In Error:', error);
+                
+                let errorMessage = 'Google Sign-In failed';
+                
+                if (error.code === 'auth/popup-closed-by-user') {
+                    errorMessage = 'Sign-in cancelled';
+                } else if (error.code === 'auth/popup-blocked') {
+                    errorMessage = 'Popup was blocked. Please allow popups and try again';
+                } else if (error.code === 'auth/cancelled-popup-request') {
+                    errorMessage = 'Sign-in cancelled';
+                }
+                
+                showAlert(errorMessage, 'error');
+                
+                // Sign out to clean up any partial state
+                try {
+                    await window.firebaseSignOut(window.firebaseAuth);
+                } catch (e) {
+                    // Ignore cleanup errors
+                }
+            }
+        }
+
+        async function handleFirebaseAuth(idToken, firebaseUser) {
+            try {
+                console.log('Sending Firebase token to backend...');
+                
+                const response = await fetch(`${API_BASE}/auth/jobseeker/firebase-login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        idToken,
+                        userInfo: {
+                            email: firebaseUser.email,
+                            firstName: firebaseUser.displayName?.split(' ')[0] || '',
+                            lastName: firebaseUser.displayName?.split(' ').slice(1).join(' ') || '',
+                            photoURL: firebaseUser.photoURL
+                        }
+                    }),
+                });
+                
+                const data = await response.json();
+                console.log('Backend response:', data);
+                
+                if (response.ok) {
+                    if (data.user.role === 'employer') {
+                        // If user is an employer, show redirect notice and sign out
+                        await window.firebaseSignOut(window.firebaseAuth);
+                        showRedirectNotice('This account is registered as an employer. Please use the Employer Portal.', 'login.html');
+                        isProcessingAuth = false;
+                        return;
+                    }
+                    
+                    // Store both old and new token formats for compatibility
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
+                    localStorage.setItem('userEmail', data.user.email);
+                    localStorage.setItem('userName', `${data.user.first_name || data.user.firstName} ${data.user.last_name || data.user.lastName}`);
+                    localStorage.setItem('userId', data.user.id);
+                    localStorage.setItem('authMethod', 'firebase');
+                    
+                    showAlert('Welcome! Checking assessment status... 🎉', 'success');
+                    
+                    setTimeout(() => {
+                        document.getElementById('loginSection').style.display = 'none';
+                        checkExistingAssessment();
+                    }, 1500);
+                } else {
+                    console.error('Backend authentication failed:', data);
+                    await window.firebaseSignOut(window.firebaseAuth);
+                    
+                    if (data.userRole === 'employer') {
+                        showRedirectNotice('This account is registered as an employer. Please use the Employer Portal.', 'login.html');
+                    } else {
+                        showAlert(data.error || 'Authentication failed', 'error');
+                    }
+                    isProcessingAuth = false;
+                }
+            } catch (error) {
+                console.error('Firebase auth error:', error);
+                await window.firebaseSignOut(window.firebaseAuth);
+                showAlert('Authentication failed. Please try again.', 'error');
+                isProcessingAuth = false;
+            }
+        }
+
+        async function handleFirebaseUser(user) {
+            try {
+                console.log('Processing Firebase user:', user.email);
+                const idToken = await user.getIdToken();
+                await handleFirebaseAuth(idToken, user);
+            } catch (error) {
+                console.error('Error handling Firebase user:', error);
+                isProcessingAuth = false;
+            }
+        }
+
+        // Login/Register Tab Switching
+        function switchTab(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            
+            if (tab === 'login') {
+                registerForm.classList.add('fade-out');
+                setTimeout(() => {
+                    registerForm.style.display = 'none';
+                    registerForm.classList.remove('fade-out');
+                    
+                    loginForm.style.display = 'block';
+                    loginForm.classList.add('fade-in');
+                    
+                    setTimeout(() => {
+                        loginForm.classList.remove('fade-in');
+                    }, 400);
+                }, 200);
+            } else {
+                loginForm.classList.add('fade-out');
+                setTimeout(() => {
+                    loginForm.style.display = 'none';
+                    loginForm.classList.remove('fade-out');
+                    
+                    registerForm.style.display = 'block';
+                    registerForm.classList.add('fade-in');
+                    
+                    setTimeout(() => {
+                        registerForm.classList.remove('fade-in');
+                    }, 400);
+                }, 200);
+            }
+            
+            document.getElementById('alert').classList.remove('show');
+            document.getElementById('redirect-notice').classList.remove('show');
+        }
+
+        // Handle Login
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            if (isProcessingAuth) return;
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                showAlert('Please enter both email and password', 'error');
+                return;
+            }
+
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            setButtonLoading(submitBtn, true);
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/jobseeker/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Store both old and new token formats for compatibility
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
+                    localStorage.setItem('userEmail', data.user.email);
+                    localStorage.setItem('userName', `${data.user.first_name} ${data.user.last_name}`);
+                    localStorage.setItem('userId', data.user.id);
+                    localStorage.setItem('authMethod', 'traditional');
+                    
+                    showAlert('Login successful! Checking assessment status...', 'success');
+                    
+                    setTimeout(() => {
+                        document.getElementById('loginSection').style.display = 'none';
+                        checkExistingAssessment();
+                    }, 1500);
+                } else {
+                    if (data.requiresGoogleAuth) {
+                        showAlert('Please sign in with Google for this account.', 'error');
+                    } else if (data.userRole === 'employer' && data.redirectTo === 'employer-portal') {
+                        showRedirectNotice('This account is registered as an employer. Please use the Employer Portal.', 'login.html');
+                    } else {
+                        showAlert(data.error || 'Login failed. Please check your credentials.', 'error');
+                    }
+                    setButtonLoading(submitBtn, false);
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showAlert('Unable to connect to the server. Please check your connection.', 'error');
+                setButtonLoading(submitBtn, false);
+            }
+        }
+
+        // Handle Registration
+        async function handleRegister(event) {
+            event.preventDefault();
+            
+            if (isProcessingAuth) return;
+            
+            const firstName = document.getElementById('registerFirstName').value;
+            const lastName = document.getElementById('registerLastName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const phone = document.getElementById('registerPhone').value;
+            
+            if (!firstName || !lastName || !email || !password) {
+                showAlert('Please fill in all required fields', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showAlert('Password must be at least 6 characters long', 'error');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                showAlert('Please enter a valid email address', 'error');
+                return;
+            }
+
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+            setButtonLoading(submitBtn, true);
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        firstName,
+                        lastName,
+                        email,
+                        password,
+                        phone,
+                        role: 'job_seeker'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Store both old and new token formats for compatibility
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
+                    localStorage.setItem('userEmail', data.user.email);
+                    localStorage.setItem('userName', `${data.user.firstName} ${data.user.lastName}`);
+                    localStorage.setItem('userId', data.user.id);
+                    localStorage.setItem('authMethod', 'traditional');
+                    
+                    showAlert('Account created successfully! Checking assessment status...', 'success');
+                    
+                    setTimeout(() => {
+                        document.getElementById('loginSection').style.display = 'none';
+                        checkExistingAssessment();
+                    }, 1500);
+                } else {
+                    showAlert(data.error || 'Registration failed. Please try again.', 'error');
+                    setButtonLoading(submitBtn, false);
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                showAlert('Unable to connect to the server. Please check your connection.', 'error');
+                setButtonLoading(submitBtn, false);
+            }
+        }
+
+        // Utility Functions
+        function showAlert(message, type) {
+            const alert = document.getElementById('alert');
+            const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : '⚠️';
+            alert.innerHTML = `${icon} ${message}`;
+            alert.className = `alert ${type} show`;
+            
+            // Auto remove after 5 seconds (unless it's a success message with redirect)
+            if (type !== 'success' || !message.includes('Checking') && !message.includes('Redirecting')) {
+                setTimeout(() => {
+                    alert.classList.remove('show');
+                }, 5000);
+            }
+        }
+
+        function showRedirectNotice(message, redirectUrl) {
+            const notice = document.getElementById('redirect-notice');
+            notice.innerHTML = `
+                ${message}
+                <br><br>
+                <a href="${redirectUrl}" onclick="redirectToEmployerPortal()">Go to Employer Portal →</a>
+            `;
+            notice.classList.add('show');
+            
+            setTimeout(() => {
+                notice.classList.remove('show');
+            }, 8000);
+        }
+
+        function redirectToEmployerPortal() {
+            window.location.href = 'login.html'; // Employer portal URL
+        }
+
+        function setButtonLoading(button, isLoading) {
+            const textSpan = button.querySelector('.btn-text');
+            
+            if (isLoading) {
+                if (textSpan) textSpan.textContent = 'Processing...';
+                button.disabled = true;
+            } else {
+                if (textSpan) {
+                    // Restore original text based on form type
+                    if (button.closest('#loginForm')) {
+                        textSpan.textContent = '🔓 Sign In to Assessment';
+                    } else {
+                        textSpan.textContent = '🎯 Create Account & Take Assessment';
+                    }
+                }
+                button.disabled = false;
+            }
+        }
+
+        // Email validation
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Logout function
+        function logout() {
+            // Clear all stored auth data
+            localStorage.removeItem('token');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('authMethod');
+            localStorage.removeItem('universalQuizScore');
+            
+            // Sign out from Firebase if needed
+            if (window.firebaseAuth && window.firebaseAuth.currentUser) {
+                window.firebaseSignOut(window.firebaseAuth);
+            }
+            
+            // Clear form data
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            
+            // Hide error/success messages
+            document.getElementById('alert').classList.remove('show');
+            document.getElementById('redirect-notice').classList.remove('show');
+            
+            // Reset to login tab
+            switchTab('login');
+            
+            // Show login section
+            showLoginSection();
+        }
+
+        // Check authentication before starting
+        function checkAuthentication() {
+            const token = localStorage.getItem('token') || localStorage.getItem('authToken');
+            if (!token) {
+                return false;
+            }
+            return true;
+        }
+
+        // Show login section
+        function showLoginSection() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('errorState').style.display = 'none';
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('resultsContent').style.display = 'none';
+        }
+
+        // Show user info in start screen
+        function showUserInfo() {
+            const userName = localStorage.getItem('userName');
+            const userEmail = localStorage.getItem('userEmail');
+            
+            if (userName && userEmail) {
+                document.getElementById('userInfo').style.display = 'block';
+                document.getElementById('userDetails').textContent = `${userName} (${userEmail})`;
+            }
+        }
+
+        // Enhanced error message display
+        function showErrorMessage(title, message, actionType = null) {
+            document.getElementById('errorState').style.display = 'block';
+            let actionButton = '';
+            
+            switch(actionType) {
+                case 'login':
+                    actionButton = `<button class="btn" onclick="showLoginSection()">Go to Login</button>`;
+                    break;
+                case 'retry':
+                    actionButton = `<button class="btn" onclick="checkExistingAssessment()">🔄 Retry</button>`;
+                    break;
+            }
+            
+            document.getElementById('errorState').innerHTML = `
+                <h3>${title}</h3>
+                <p>${message}</p>
+                ${actionButton}
+            `;
+        }
+
+        // Check existing assessment with better error handling
+        async function checkExistingAssessment() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('errorState').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('loadingState').style.display = 'block';
+            
+            const token = localStorage.getItem('token') || localStorage.getItem('authToken');
+            
+            if (!token) {
+                document.getElementById('loadingState').style.display = 'none';
+                showLoginSection();
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/assessment/status`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.status === 401 || response.status === 403) {
+                    throw new Error('AUTHENTICATION_FAILED');
+                }
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                document.getElementById('loadingState').style.display = 'none';
+                
+                if (data.hasCompleted) {
+                    showExistingResults(data.assessment);
+                } else if (data.canTakeAssessment) {
+                    document.getElementById('startScreen').style.display = 'block';
+                    showUserInfo();
+                } else {
+                    showErrorMessage(
+                        'Assessment Unavailable',
+                        data.message || 'Unable to load assessment status',
+                        'retry'
+                    );
+                }
+            } catch (error) {
+                console.error('Error checking assessment status:', error);
+                document.getElementById('loadingState').style.display = 'none';
+                
+                if (error.message === 'AUTHENTICATION_FAILED') {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('authToken');
+                    showLoginSection();
+                    return;
+                }
+                
+                showErrorMessage(
+                    'Connection Error',
+                    `Unable to connect to the server: ${error.message}. Please check your connection and try again.`,
+                    'retry'
+                );
+            }
+        }
+
+        // Show existing results if already completed
+        function showExistingResults(assessmentData) {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('resultsContent').style.display = 'block';
+            
+            const percentage = assessmentData.percentage_score || assessmentData.percentage;
+            const correctCount = assessmentData.correct_answers || assessmentData.correctCount;
+            const totalQuestions = assessmentData.total_questions || assessmentData.totalQuestions || 15;
+            const totalPoints = assessmentData.total_points || assessmentData.totalPoints;
+            const maxPoints = assessmentData.max_possible_points || assessmentData.maxPoints || 150;
+            const skillScores = assessmentData.skill_scores || assessmentData.skillScores;
+            
+            let timeTaken;
+            if (assessmentData.time_taken_seconds) {
+                timeTaken = formatTime(assessmentData.time_taken_seconds);
+            } else {
+                timeTaken = assessmentData.timeTaken || '0:00';
+            }
+            
+            document.getElementById('finalScore').textContent = `${percentage}%`;
+            document.getElementById('correctCount').textContent = `${correctCount}/${totalQuestions}`;
+            document.getElementById('pointsEarned').textContent = `${totalPoints}/${maxPoints}`;
+            document.getElementById('timeTaken').textContent = timeTaken;
+
+            const skillBreakdown = document.getElementById('skillBreakdown');
+            skillBreakdown.innerHTML = '';
+            
+            if (skillScores) {
+                const skillData = typeof skillScores === 'string' ? JSON.parse(skillScores) : skillScores;
+                Object.entries(skillData).forEach(([skill, scores]) => {
+                    const percentage = scores.total > 0 ? Math.round((scores.correct / scores.total) * 100) : 0;
+                    
+                    const skillDiv = document.createElement('div');
+                    skillDiv.className = 'skill-score';
+                    skillDiv.innerHTML = `
+                        <div class="skill-name">${skill}</div>
+                        <div class="skill-percentage">${percentage}%</div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" style="width: ${percentage}%"></div>
+                        </div>
+                    `;
+                    skillBreakdown.appendChild(skillDiv);
+                });
+            }
+        }
+
+        // Start the quiz with authentication check
+        function startQuiz() {
+            if (!checkAuthentication()) {
+                showLoginSection();
+                return;
+            }
+            
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('quizContent').style.display = 'block';
+            
+            userAnswers = new Array(universalQuestions.length).fill(null);
+            
+            startTime = Date.now();
+            startTimer();
+            hasStarted = true;
+            
+            showQuestion(0);
+        }
+
+        // Display a question
+        function showQuestion(index) {
+            const question = universalQuestions[index];
+            
+            document.getElementById('skillCategory').textContent = question.category;
+            document.getElementById('questionNumber').textContent = `Question ${index + 1}`;
+            document.getElementById('questionText').textContent = question.question;
+            document.getElementById('questionProgress').textContent = `Question ${index + 1} of ${universalQuestions.length}`;
+            
+            const progress = ((index + 1) / universalQuestions.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            const options = ['A', 'B', 'C', 'D'];
+            options.forEach(letter => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.onclick = () => selectOption(letter);
+                
+                if (userAnswers[index] === letter) {
+                    optionDiv.classList.add('selected');
+                }
+                
+                optionDiv.innerHTML = `
+                    <div class="option-letter">${letter}</div>
+                    <div>${question[`option_${letter.toLowerCase()}`]}</div>
+                `;
+                
+                optionsContainer.appendChild(optionDiv);
+            });
+            
+            document.getElementById('prevBtn').disabled = index === 0;
+            
+            if (index === universalQuestions.length - 1) {
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('submitBtn').style.display = 'inline-block';
+            } else {
+                document.getElementById('nextBtn').style.display = 'inline-block';
+                document.getElementById('submitBtn').style.display = 'none';
+            }
+        }
+
+        // Select an option
+        function selectOption(letter) {
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            
+            event.target.closest('.option').classList.add('selected');
+            
+            userAnswers[currentQuestionIndex] = letter;
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestionIndex < universalQuestions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        // Navigate to previous question
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        // Start the timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                const timerElement = document.getElementById('timer');
+                
+                timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 300 && timeRemaining > 60) {
+                    timerElement.classList.add('warning');
+                } else if (timeRemaining <= 60) {
+                    timerElement.classList.remove('warning');
+                    timerElement.classList.add('critical');
+                }
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Submit the quiz
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            
+            const unansweredCount = userAnswers.filter(answer => answer === null).length;
+            if (unansweredCount > 0) {
+                const proceed = confirm(`You have ${unansweredCount} unanswered questions. Submit anyway?`);
+                if (!proceed) {
+                    startTimer();
+                    return;
+                }
+            }
+            
+            if (!checkAuthentication()) {
+                showLoginSection();
+                return;
+            }
+            
+            const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+            
+            const scores = calculateScores();
+            
+            const submissionData = {
+                answers: userAnswers.map((answer, index) => ({
+                    questionId: index + 1,
+                    selectedAnswer: answer
+                })),
+                timeTaken: timeTaken,
+                totalQuestions: universalQuestions.length,
+                correctAnswers: scores.correctCount,
+                totalPoints: scores.totalPoints,
+                maxPossiblePoints: scores.maxPoints,
+                percentageScore: scores.percentage,
+                skillBreakdown: scores.skillScores
+            };
+            
+            submitToBackend(submissionData, timeTaken);
+        }
+
+        // Submit assessment to backend with better error handling
+        async function submitToBackend(submissionData, timeTaken) {
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('loadingState').style.display = 'block';
+            document.querySelector('#loadingState h3').textContent = 'Submitting Assessment...';
+            document.querySelector('#loadingState p').textContent = 'Please wait while we save your results.';
+            
+            const token = localStorage.getItem('token') || localStorage.getItem('authToken');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/assessment/submit`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(submissionData)
+                });
+                
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    const resultsData = {
+                        percentage: data.score.percentage,
+                        correctCount: data.score.correctAnswers,
+                        totalQuestions: data.score.totalQuestions,
+                        totalPoints: data.score.points,
+                        maxPoints: data.score.maxPoints,
+                        skillScores: data.score.skillBreakdown,
+                        timeTaken: formatTime(timeTaken),
+                        completedAt: new Date().toISOString()
+                    };
+                    localStorage.setItem('universalQuizScore', JSON.stringify(resultsData));
+                    
+                    document.getElementById('loadingState').style.display = 'none';
+                    showResults(data.score, timeTaken);
+                } else {
+                    throw new Error(data.error || 'Failed to submit assessment');
+                }
+            } catch (error) {
+                console.error('Error submitting assessment:', error);
+                document.getElementById('loadingState').style.display = 'none';
+                showSubmissionError(error.message, submissionData, timeTaken);
+            }
+        }
+
+        // Show detailed submission error with recovery options
+        function showSubmissionError(errorMessage, submissionData, timeTaken) {
+            document.getElementById('errorState').style.display = 'block';
+            document.getElementById('errorState').innerHTML = `
+                <h3>⚠️ Submission Failed</h3>
+                <p><strong>Error:</strong> ${errorMessage}</p>
+                <div style="margin: 20px 0;">
+                    <p>Your quiz answers have been saved locally. You can:</p>
+                    <button class="btn" onclick="retrySubmission('${btoa(JSON.stringify(submissionData))}', ${timeTaken})" style="margin: 5px;">
+                        🔄 Retry Submission
+                    </button>
+                    <button class="btn btn-secondary" onclick="contactSupport()" style="margin: 5px;">
+                        📧 Contact Support
+                    </button>
+                </div>
+                <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                    <small><strong>Note:</strong> Your answers are preserved. You won't lose your progress.</small>
+                </div>
+            `;
+        }
+
+        // Retry submission function
+        function retrySubmission(encodedData, timeTaken) {
+            try {
+                const submissionData = JSON.parse(atob(encodedData));
+                document.getElementById('errorState').style.display = 'none';
+                submitToBackend(submissionData, timeTaken);
+            } catch (error) {
+                alert('Failed to retry submission. Please contact support.');
+            }
+        }
+
+        // Contact support function
+        function contactSupport() {
+            const supportInfo = `
+Assessment Submission Issue
+User: ${localStorage.getItem('userEmail') || 'Unknown'}
+Time: ${new Date().toISOString()}
+Error: Failed to submit assessment results
+Browser: ${navigator.userAgent}
+
+Please help sync my assessment results.
+            `;
+            
+            const mailtoLink = `mailto:support@jobseeker.com?subject=Assessment Submission Issue&body=${encodeURIComponent(supportInfo)}`;
+            window.open(mailtoLink);
+            
+            alert('Support Contact:\nEmail: support@jobseeker.com\nPhone: 1-800-JOBSEEK\n\nYour assessment details have been prepared for the support team.');
+        }
+
+        // Calculate quiz scores
+        function calculateScores() {
+            let correctCount = 0;
+            let totalPoints = 0;
+            const maxPoints = universalQuestions.length * 10;
+            const skillScores = {};
+
+            const categories = ['Problem Solving', 'Communication', 'Adaptability', 'Time Management', 'Professional Ethics'];
+            categories.forEach(cat => {
+                skillScores[cat] = { correct: 0, total: 0 };
+            });
+
+            universalQuestions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correct_answer;
+                
+                skillScores[question.category].total++;
+                
+                if (isCorrect) {
+                    correctCount++;
+                    totalPoints += question.points;
+                    skillScores[question.category].correct++;
+                }
+            });
+
+            const percentage = Math.round((totalPoints / maxPoints) * 100);
+
+            return {
+                correctCount,
+                totalQuestions: universalQuestions.length,
+                totalPoints,
+                maxPoints,
+                percentage,
+                skillScores
+            };
+        }
+
+        // Show results with better data handling
+        function showResults(results, timeTaken) {
+            document.getElementById('quizContent').style.display = 'none';
+            document.getElementById('resultsContent').style.display = 'block';
+            
+            const percentage = results.percentage || results.percentageScore || 0;
+            const correctCount = results.correctAnswers || results.correctCount || 0;
+            const totalQuestions = results.totalQuestions || universalQuestions.length;
+            const totalPoints = results.points || results.totalPoints || 0;
+            const maxPoints = results.maxPoints || results.maxPossiblePoints || (universalQuestions.length * 10);
+            const skillScores = results.skillBreakdown || results.skillScores || {};
+            
+            document.getElementById('finalScore').textContent = `${percentage}%`;
+            document.getElementById('correctCount').textContent = `${correctCount}/${totalQuestions}`;
+            document.getElementById('pointsEarned').textContent = `${totalPoints}/${maxPoints}`;
+            document.getElementById('timeTaken').textContent = formatTime(timeTaken);
+
+            const skillBreakdown = document.getElementById('skillBreakdown');
+            skillBreakdown.innerHTML = '';
+            
+            if (skillScores && Object.keys(skillScores).length > 0) {
+                Object.entries(skillScores).forEach(([skill, scores]) => {
+                    const percentage = scores.total > 0 ? Math.round((scores.correct / scores.total) * 100) : 0;
+                    
+                    const skillDiv = document.createElement('div');
+                    skillDiv.className = 'skill-score';
+                    skillDiv.innerHTML = `
+                        <div class="skill-name">${skill}</div>
+                        <div class="skill-percentage">${percentage}%</div>
+                        <div class="skill-bar">
+                            <div class="skill-fill" style="width: ${percentage}%"></div>
+                        </div>
+                    `;
+                    skillBreakdown.appendChild(skillDiv);
+                });
+
+                setTimeout(() => {
+                    const skillFills = document.querySelectorAll('.skill-fill');
+                    skillFills.forEach(fill => {
+                        const width = fill.style.width;
+                        fill.style.width = '0%';
+                        setTimeout(() => {
+                            fill.style.width = width;
+                        }, 100);
+                    });
+                }, 500);
+            }
+        }
+
+        // Format time from seconds to MM:SS
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // Navigate to job search
+        function goToJobSearch() {
+            window.location.href = 'jobseeker.html';
+        }
+
+        // Download certificate with better formatting
+        function downloadCertificate() {
+            const score = JSON.parse(localStorage.getItem('universalQuizScore'));
+            if (!score) {
+                alert('No assessment results found. Please complete the assessment first.');
+                return;
+            }
+
+            const userName = localStorage.getItem('userName') || 'Assessment Taker';
+            const completionDate = score.completedAt ? new Date(score.completedAt).toLocaleDateString() : new Date().toLocaleDateString();
+            
+            const certificateContent = `
+═══════════════════════════════════════════════════════
+               PROFESSIONAL SKILLS ASSESSMENT
+                        CERTIFICATE
+═══════════════════════════════════════════════════════
+
+This certifies that ${userName} has successfully completed
+a comprehensive Professional Skills Assessment.
+
+ASSESSMENT RESULTS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Overall Score:        ${score.percentage}%
+Correct Answers:      ${score.correctCount}/${score.totalQuestions}
+Points Earned:        ${score.totalPoints}/${score.maxPoints}
+Time Taken:          ${score.timeTaken}
+Completion Date:     ${completionDate}
+
+SKILL BREAKDOWN:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${Object.entries(score.skillScores).map(([skill, scores]) => {
+    const percentage = scores.total > 0 ? Math.round((scores.correct / scores.total) * 100) : 0;
+    return `${skill.padEnd(20)} ${percentage}%`;
+}).join('\n')}
+
+ASSESSMENT DESCRIPTION:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+This assessment evaluates core professional skills that are
+valuable across all industries and job roles, including:
+
+• Problem Solving & Critical Thinking
+• Communication & Collaboration  
+• Adaptability & Learning
+• Time Management & Organization
+• Professional Ethics & Integrity
+
+This certificate validates professional competency and
+readiness for workplace challenges.
+
+═══════════════════════════════════════════════════════
+               Job Seeker Professional Network
+                  Certificate ID: JS-${Date.now()}
+═══════════════════════════════════════════════════════
+            `;
+
+            const blob = new Blob([certificateContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Professional_Skills_Certificate_${userName.replace(/\s+/g, '_')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Handle page refresh/close warnings
+        window.addEventListener('beforeunload', function(e) {
+            if (hasStarted && document.getElementById('quizContent').style.display !== 'none') {
+                e.preventDefault();
+                e.returnValue = 'Are you sure you want to leave? Your quiz progress will be lost.';
+                return e.returnValue;
+            }
+        });
+
+        // Handle network status changes
+        window.addEventListener('online', function() {
+            console.log('Connection restored');
+        });
+
+        window.addEventListener('offline', function() {
+            console.log('Connection lost');
+        });
+    </script>
+</body>
+</html>

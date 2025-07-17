@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Login - Job Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 28px;
+        }
+
+        .employer-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            background: rgba(248, 249, 250, 0.8);
+            border-radius: 15px;
+            padding: 8px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px 25px;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn {
+            padding: 15px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-google {
+            background: white;
+            color: #333;
+            border: 2px solid #ddd;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-google:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: #4285f4;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            color: #666;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .divider span {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0 15px;
+            position: relative;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, rgba(81, 207, 102, 0.1), rgba(64, 192, 87, 0.1));
+            color: #155724;
+            border: 1px solid rgba(64, 192, 87, 0.3);
+        }
+
+        .alert-error {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(238, 90, 82, 0.1));
+            color: #721c24;
+            border: 1px solid rgba(238, 90, 82, 0.3);
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #667eea;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .portal-links {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .portal-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .portal-links a:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+            }
+            
+            .card {
+                padding: 30px 20px;
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2>🏢 Employer Portal</h2>
+            <div class="employer-badge">
+                For Companies & Recruiters Only
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="switchAuthTab('login')">Login</div>
+                <div class="tab" onclick="switchAuthTab('register')">Register</div>
+            </div>
+
+            <div id="alertContainer"></div>
+
+            <!-- Login Form -->
+            <div id="loginTab" class="tab-content active">
+                <!-- Google Sign-In Button -->
+                <button id="googleSignInBtn" class="btn btn-google">
+                    <svg class="google-icon" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Continue with Google
+                </button>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">📧 Company Email</label>
+                        <input type="email" id="loginEmail" class="form-control" required placeholder="Enter your company email">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">🔒 Password</label>
+                        <input type="password" id="loginPassword" class="form-control" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">🚀 Access Employer Dashboard</span>
+                        <div class="loading"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerTab" class="tab-content">
+                <!-- Google Sign-In Button for Register -->
+                <button id="googleSignUpBtn" class="btn btn-google">
+                    <svg class="google-icon" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Sign up with Google
+                </button>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <form id="registerForm">
+                    <div class="two-column">
+                        <div class="form-group">
+                            <label for="registerFirstName">👤 First Name</label>
+                            <input type="text" id="registerFirstName" class="form-control" required placeholder="First name">
+                        </div>
+                        <div class="form-group">
+                            <label for="registerLastName">👤 Last Name</label>
+                            <input type="text" id="registerLastName" class="form-control" required placeholder="Last name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">📧 Company Email</label>
+                        <input type="email" id="registerEmail" class="form-control" required placeholder="Enter your company email">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">🔒 Password</label>
+                        <input type="password" id="registerPassword" class="form-control" required placeholder="Create a strong password" minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerCompany">🏢 Company Name</label>
+                        <input type="text" id="registerCompany" class="form-control" required placeholder="Your company name">
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">📱 Phone (Optional)</label>
+                        <input type="tel" id="registerPhone" class="form-control" placeholder="Your phone number">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-text">🎯 Create Employer Account</span>
+                        <div class="loading"></div>
+                    </button>
+                </form>
+            </div>
+
+            <div class="portal-links">
+                <p style="color: #666; margin-bottom: 10px;">Looking for a job instead?</p>
+                <a href="loginseeker.html">👤 Go to Job Seeker Portal</a>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDreznbSPyOFi35R7vP6lyolvNI_lEWdPo",
+            authDomain: "jobseeker-655c1.firebaseapp.com",
+            projectId: "jobseeker-655c1",
+            storageBucket: "jobseeker-655c1.firebasestorage.app",
+            messagingSenderId: "685942696547",
+            appId: "1:685942696547:web:088e5ce6d4886b0020a656",
+            measurementId: "G-1C7PERBMPX"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Make auth available globally
+        window.firebaseAuth = auth;
+        window.googleProvider = provider;
+        window.signInWithPopup = signInWithPopup;
+        window.onAuthStateChanged = onAuthStateChanged;
+        window.firebaseSignOut = signOut;
+        window.firebaseInitialized = true;
+    </script>
+
+    <script>
+        const API_BASE = 'http://localhost:3001/api';
+        let isProcessingAuth = false;
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Clear any existing auth state on page load to prevent auto-redirects
+            clearAuthState();
+            
+            setupFormListeners();
+            
+            // Wait for Firebase to initialize before setting up auth
+            waitForFirebase();
+        });
+
+        function clearAuthState() {
+            // Only clear if there's a logout flag or if we're coming from a fresh login
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('logout') === 'true' || urlParams.get('fresh') === 'true') {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('authMethod');
+                
+                // Clear URL parameters
+                if (urlParams.get('logout') || urlParams.get('fresh')) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }
+        }
+
+        function waitForFirebase() {
+            if (typeof window.firebaseInitialized !== 'undefined') {
+                setupFirebaseAuth();
+            } else {
+                setTimeout(waitForFirebase, 100);
+            }
+        }
+
+        function setupFormListeners() {
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('registerForm').addEventListener('submit', handleRegister);
+        }
+
+        function setupFirebaseAuth() {
+            // Set up Google Sign-In buttons
+            document.getElementById('googleSignInBtn').addEventListener('click', handleGoogleSignIn);
+            document.getElementById('googleSignUpBtn').addEventListener('click', handleGoogleSignIn);
+
+            // Monitor auth state but don't auto-redirect during processing
+            window.onAuthStateChanged(window.firebaseAuth, (user) => {
+                if (user && !isProcessingAuth) {
+                    console.log('Firebase user detected:', user.email);
+                    // Only process if we don't have a local token
+                    if (!localStorage.getItem('authToken')) {
+                        isProcessingAuth = true;
+                        handleFirebaseUser(user);
+                    }
+                }
+            });
+        }
+
+        async function handleGoogleSignIn() {
+            if (isProcessingAuth) return;
+            
+            try {
+                isProcessingAuth = true;
+                showAlert('Signing in with Google...', 'success');
+                
+                // Sign out any existing user first
+                try {
+                    await window.firebaseSignOut(window.firebaseAuth);
+                } catch (e) {
+                    // Ignore sign out errors
+                }
+                
+                const result = await window.signInWithPopup(window.firebaseAuth, window.googleProvider);
+                const user = result.user;
+                
+                console.log('Google sign-in successful:', user.email);
+                
+                // Get the Firebase ID token
+                const idToken = await user.getIdToken();
+                
+                // Send to your backend for verification and user creation/login
+                await handleFirebaseAuth(idToken, user);
+                
+            } catch (error) {
+                isProcessingAuth = false;
+                console.error('Google Sign-In Error:', error);
+                
+                let errorMessage = 'Google Sign-In failed';
+                
+                if (error.code === 'auth/popup-closed-by-user') {
+                    errorMessage = 'Sign-in cancelled';
+                } else if (error.code === 'auth/popup-blocked') {
+                    errorMessage = 'Popup was blocked. Please allow popups and try again';
+                } else if (error.code === 'auth/cancelled-popup-request') {
+                    errorMessage = 'Sign-in cancelled';
+                }
+                
+                showAlert(errorMessage, 'error');
+                
+                // Sign out to clean up any partial state
+                try {
+                    await window.firebaseSignOut(window.firebaseAuth);
+                } catch (e) {
+                    // Ignore cleanup errors
+                }
+            }
+        }
+
+        async function handleFirebaseAuth(idToken, firebaseUser) {
+            try {
+                console.log('Sending Firebase token to backend...');
+                
+                const response = await fetch(`${API_BASE}/auth/firebase-login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        idToken,
+                        userInfo: {
+                            email: firebaseUser.email,
+                            firstName: firebaseUser.displayName?.split(' ')[0] || '',
+                            lastName: firebaseUser.displayName?.split(' ').slice(1).join(' ') || '',
+                            photoURL: firebaseUser.photoURL
+                        }
+                    }),
+                });
+                
+                const data = await response.json();
+                console.log('Backend response:', data);
+                
+                if (response.ok) {
+                    if (data.user.role !== 'employer' && data.user.role !== 'admin') {
+                        // If user is not an employer, show error and sign out
+                        await window.firebaseSignOut(window.firebaseAuth);
+                        showAlert('This portal is for employers only. Please use the Job Seeker Portal.', 'error');
+                        isProcessingAuth = false;
+                        return;
+                    }
+                    
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
+                    localStorage.setItem('authMethod', 'firebase');
+                    
+                    showAlert('Welcome! Redirecting to dashboard... 🎉', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'jobemployer.html';
+                    }, 1500);
+                } else {
+                    console.error('Backend authentication failed:', data);
+                    await window.firebaseSignOut(window.firebaseAuth);
+                    showAlert(data.error || 'Authentication failed', 'error');
+                    isProcessingAuth = false;
+                }
+            } catch (error) {
+                console.error('Firebase auth error:', error);
+                await window.firebaseSignOut(window.firebaseAuth);
+                showAlert('Authentication failed. Please try again.', 'error');
+                isProcessingAuth = false;
+            }
+        }
+
+        async function handleFirebaseUser(user) {
+            try {
+                console.log('Processing Firebase user:', user.email);
+                const idToken = await user.getIdToken();
+                await handleFirebaseAuth(idToken, user);
+            } catch (error) {
+                console.error('Error handling Firebase user:', error);
+                isProcessingAuth = false;
+            }
+        }
+
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.querySelector('.tab:first-child').classList.add('active');
+                document.getElementById('loginTab').classList.add('active');
+            } else {
+                document.querySelector('.tab:last-child').classList.add('active');
+                document.getElementById('registerTab').classList.add('active');
+            }
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            
+            if (isProcessingAuth) return;
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            setButtonLoading(submitBtn, true);
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    if (data.user.role !== 'employer' && data.user.role !== 'admin') {
+                        showAlert('This portal is for employers only. Please use the Job Seeker Portal.', 'error');
+                        setButtonLoading(submitBtn, false);
+                        return;
+                    }
+                    
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
+                    localStorage.setItem('authMethod', 'traditional');
+                    
+                    showAlert('Welcome back! Redirecting to dashboard... 🎉', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'jobemployer.html';
+                    }, 1500);
+                } else {
+                    if (data.requiresGoogleAuth) {
+                        showAlert('Please sign in with Google for this account.', 'error');
+                    } else {
+                        showAlert(data.error || 'Login failed', 'error');
+                    }
+                    setButtonLoading(submitBtn, false);
+                }
+            } catch (error) {
+                showAlert('Network error. Please try again.', 'error');
+                setButtonLoading(submitBtn, false);
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            
+            if (isProcessingAuth) return;
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            setButtonLoading(submitBtn, true);
+            
+            const formData = {
+                firstName: document.getElementById('registerFirstName').value,
+                lastName: document.getElementById('registerLastName').value,
+                email: document.getElementById('registerEmail').value,
+                password: document.getElementById('registerPassword').value,
+                company_name: document.getElementById('registerCompany').value,
+                phone: document.getElementById('registerPhone').value,
+                role: 'employer' // Explicitly set role to employer
+            };
+            
+            // Basic validation
+            if (formData.password.length < 6) {
+                showAlert('Password must be at least 6 characters long', 'error');
+                setButtonLoading(submitBtn, false);
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
+                    localStorage.setItem('authMethod', 'traditional');
+                    
+                    showAlert('Employer account created successfully! Redirecting... 🎉', 'success');
+                    
+                    setTimeout(() => {
+                        window.location.href = 'jobemployer.html';
+                    }, 1500);
+                } else {
+                    showAlert(data.error || 'Registration failed', 'error');
+                    setButtonLoading(submitBtn, false);
+                }
+            } catch (error) {
+                showAlert('Network error. Please try again.', 'error');
+                setButtonLoading(submitBtn, false);
+            }
+        }
+
+        function setButtonLoading(button, isLoading) {
+            const textSpan = button.querySelector('.btn-text');
+            const loadingDiv = button.querySelector('.loading');
+            
+            if (isLoading) {
+                if (textSpan) textSpan.style.display = 'none';
+                if (loadingDiv) loadingDiv.style.display = 'inline-block';
+                button.disabled = true;
+            } else {
+                if (textSpan) textSpan.style.display = 'inline';
+                if (loadingDiv) loadingDiv.style.display = 'none';
+                button.disabled = false;
+            }
+        }
+
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alertContainer');
+            
+            // Clear existing alerts
+            alertContainer.innerHTML = '';
+            
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            
+            const icon = type === 'success' ? '✅' : '❌';
+            alert.innerHTML = `${icon} ${message}`;
+            
+            alertContainer.appendChild(alert);
+            
+            // Auto remove after 5 seconds (unless it's a success message with redirect)
+            if (type !== 'success' || !message.includes('Redirecting')) {
+                setTimeout(() => {
+                    if (alert.parentNode) {
+                        alert.remove();
+                    }
+                }, 5000);
+            }
+        }
+
+        // Handle Enter key on forms
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const activeForm = document.querySelector('.tab-content.active form');
+                if (activeForm) {
+                    activeForm.dispatchEvent(new Event('submit'));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
